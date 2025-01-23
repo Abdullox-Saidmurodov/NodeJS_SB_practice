@@ -1,4 +1,6 @@
 const http = require('http')
+const fs = require('fs')
+const path = require('path')
 
 const server = http.createServer((req, res) => {
     // // req - so'rov
@@ -11,14 +13,32 @@ const server = http.createServer((req, res) => {
     // res.end('<h1>Hello world 4</h1>')
 
     if(req.method === 'GET') {
-        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-        res.end(`
-            <h3>Send name</h3>
-            <form method="post" action="/">
-                <input name="name" type="name" placeholder="Enter your name" />
-                <button type="submit">Send name</button>
-            </form>
-        `)
+        // res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+
+        res.writeHead(200, {'Content-Type': 'text/html'})
+        if(req.url === '/') {
+            fs.readFile(path.join(__dirname, 'templates', 'index.html'), 'utf-8', (err, conten) => {
+                if(err) throw new err
+                res.end(conten)
+            })
+        } else if(req.url === '/about') {
+            fs.readFile(path.join(__dirname, 'templates', 'about.html'), 'utf-8', (err, conten) => {
+                if(err) throw new err
+                res.end(conten)
+            })
+        } else if(req.url === '/contact') {
+            fs.readFile(path.join(__dirname, 'templates', 'contact.html'), 'utf-8', (err, conten) => {
+                if(err) throw new err
+                res.end(conten)
+            })
+        }
+        // res.end(`
+        //     <h3>Send name</h3>
+        //     <form method="post" action="/">
+        //         <input name="name" type="name" placeholder="Enter your name" />
+        //         <button type="submit">Send name</button>
+        //     </form>
+        // `)
     } else if(req.method === "POST") {
         const body = []
 
