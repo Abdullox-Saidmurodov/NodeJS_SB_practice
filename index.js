@@ -31,6 +31,12 @@ const server = http.createServer((req, res) => {
                 if(err) throw new err
                 res.end(conten)
             })
+        } else if(req.url === '/api/admin') {
+            // res.writeHead(200, {'Content-Type': 'text/json'})
+
+            const admin = {name: 'Abdullox', surname: 'Saidmurodov', job: 'Full-Stack developer'}
+
+            res.end(JSON.stringify(admin))
         }
         // res.end(`
         //     <h3>Send name</h3>
