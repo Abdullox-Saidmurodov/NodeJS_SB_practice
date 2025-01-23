@@ -10,5 +10,12 @@
     "nodejs"
   ],
   "author": "Abdullox Saidmurodov",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
