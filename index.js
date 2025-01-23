@@ -1,13 +1,42 @@
 const http = require('http')
 
 const server = http.createServer((req, res) => {
-    // req - so'rov
-    // res - javob
-    console.log(req.url)
+    // // req - so'rov
+    // // res - javob
+    // // console.log(req.url)
+    // console.log(req.method)
 
-    res.write('<h1>Hello world 5</h1>')
-    res.write('<h1>Hello world 1</h1>')
-    res.end()
+    // // res.write('<h1>Hello world 5</h1>')
+    // // res.write('<h1>Hello world 1</h1>')
+    // res.end('<h1>Hello world 4</h1>')
+
+    if(req.method === 'GET') {
+        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+        res.end(`
+            <h3>Send name</h3>
+            <form method="post" action="/">
+                <input name="name" type="name" placeholder="Enter your name" />
+                <button type="submit">Send name</button>
+            </form>
+        `)
+    } else if(req.method === "POST") {
+        const body = []
+
+        req.on('data', data => {
+            // body.push(Buffer.from(data).toString())
+            body.push(Buffer.from(data))
+        })
+
+        req.on('end', () => {
+            const message = body.toString().split('=')[1]
+            res.end(`Name successfully added: ${message}`)
+        })
+
+        // req.on('end', () => {
+        //     console.log(body)
+        // })
+
+    }
 })
 
 server.listen(3000, () => {
