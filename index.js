@@ -1,25 +1,15 @@
-// console.log("Hello world")
+const http = require('http')
 
-// const logger = () => console.log("Hello logger")
+const server = http.createServer((req, res) => {
+    // req - so'rov
+    // res - javob
+    console.log(req.url)
 
-// logger()
+    res.write('<h1>Hello world 5</h1>')
+    res.write('<h1>Hello world 1</h1>')
+    res.end()
+})
 
-// console.log("Hello world", __dirname)
-// console.log("Hello world", __filename)
-
-// const car = {name: 'MERS', color: 'black'}
-// const carLogger = () => console.log('Logger car');
-
-// const user = {name: 'Samar'}
-// const userLogger = () => console.log('Logger user')
-
-// console.log('Hello world')
-
-const userData = require('./user')
-const carData = require('./car')
-
-console.log(userData.user);
-userData.userLogger()
-
-console.log(carData.car)
-carData.carLogger()
+server.listen(3000, () => {
+    console.log('Server has been started on port: 3000')
+})
